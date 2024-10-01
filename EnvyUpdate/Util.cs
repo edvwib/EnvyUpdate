@@ -100,21 +100,15 @@ namespace EnvyUpdate
         /// <returns></returns>
         public static bool IsInstanceOpen(string name)
         {
-            // This basically counts the processes named like the supplied string. If the count is more than 0, it will return true.
-            // Let's hope nobody manages to open this application 2,147,483,647 times, because then the int would overflow and crash EnvyUpdate. But I suppose you've got worse problems than that if you've got 2,147,483,647 instances of any process.
-            int count = 0;
             foreach (Process clsProcess in Process.GetProcesses())
             {
                 if (clsProcess.ProcessName.Contains(name))
                 {
-                    count++;
+                    return true;
                 }
             }
 
-            if (count > 1)
-                return true;
-            else
-                return false;
+            return false;
         }
         /// <summary>
         /// Shows main window and restores WindowState
